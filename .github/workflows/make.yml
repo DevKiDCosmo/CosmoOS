@@ -13,15 +13,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install Watcom
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y wget
-          wget -q -O - https://github.com/open-watcom/open-watcom-v2/releases/download/Current-build/open-watcom-v2_2022-01-10_64bit.7z
-          sudo apt-get install -y p7zip-full
-          7z x open-watcom-v2_2022-01-10_64bit.7z -o/opt/open-watcom
-          sudo ln -s /opt/open-watcom /usr/local/watcom
-          echo 'export PATH=$PATH:/usr/local/watcom/binl64' >> $GITHUB_ENV
+      #- name: Install Watcom
+      #  run: |
+      #    sudo apt-get update
+      #    sudo apt-get install -y wget
+      #    wget -q -O - https://github.com/open-watcom/open-watcom-v2/archive/refs/tags/Current-build.tar.gz | tar -xz -C /opt
+      #    sudo mv /opt/open-watcom-v2-Current-build /opt/watcom
+      #    sudo ln -s /opt/watcom /usr/local/watcom/
+      #    echo 'export PATH=$PATH:/usr/local/watcom/binl64' >> $GITHUB_ENV
 
       - name: Install NASM
         run: |
