@@ -1,0 +1,30 @@
+on:
+  push:
+    branches:
+      - main
+      - 'release/*'
+
+jobs:
+  make:
+    name: Building OS
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Watcom
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget
+          wget -q -O - http://www.openwatcom.org/download/ftp/current-build/open-watcom-c-linux-2.0-beta3.64-bit.tar.bz2 | tar -xjf - -C /opt
+          sudo ln -s /opt/ow2/watcom /usr/local/watcom
+          export PATH=$PATH:/usr/local/watcom/binl64
+
+      - name: Install NASM
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y nasm
+
+      - name: Build OS
+        run: make
